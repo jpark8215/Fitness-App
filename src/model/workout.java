@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class workout {
     private ArrayList<workout> elements;
+    private LocalTime startTime;
 
     public workout() {
         this.elements = new ArrayList<>();
@@ -16,10 +17,6 @@ public class workout {
 
     public void remove(workout element) {
         elements.remove(element);
-    }
-
-    public int size() {
-        return elements.size();
     }
 
     public workout get(int index) {
@@ -38,13 +35,21 @@ public class workout {
         elements.clear();
     }
 
+    public void setName() {
+        this.elements = elements;
+    }
+
+    public ArrayList<workout> getName() {
+        return elements;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
     public LocalTime getStartTime() {
-        return null;
+        return startTime;
     }
 
-    public String getName() {
-        return null;
-    }
-
-    // other methods as needed...
 }
+

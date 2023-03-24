@@ -1,9 +1,7 @@
 /**
  * @author Jieun Park
  */
-
 package main;
-
 //import controller.LoginController;
 //import database.DBConnection;
 //import javafx.application.Application;
@@ -12,7 +10,13 @@ package main;
 //import javafx.scene.Scene;
 //import javafx.stage.Stage;
 
+
+import model.workout;
+import model.workoutSchedule;
+import model.activityTracker;
+
 import java.io.IOException;
+import java.time.LocalTime;
 import java.util.Objects;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -22,44 +26,30 @@ import java.util.logging.SimpleFormatter;
 /**
  * Main class
  */
-public class main {
-    private static boolean WorkoutSchedule;
 
-    //    /**
-//     * @param primaryStage Main stage
-//     */
-//    @Override
-//    public void start(Stage primaryStage) throws Exception {
-//        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/login.fxml")));
-//        primaryStage.setTitle("Fitness App");
-//        primaryStage.setScene(new Scene(root, 800, 400));
-//        primaryStage.show();
-//    }
-//
-//    /**
-//     * @param args Creates login_activity.txt file
-//     *             Makes and closes connections
-//     */
-//    public static void main(String[] args) throws Exception {
-//        Logger log = Logger.getLogger("login_activity.txt");
-//
-//        try {
-//            FileHandler fileHandler = new FileHandler("login_activity.txt", true);
-//            SimpleFormatter simpleFormatter = new SimpleFormatter();
-//            fileHandler.setFormatter(simpleFormatter);
-//            log.addHandler(fileHandler);
-//
-//
-//        } catch (IOException | SecurityException ex) {
-//            Logger.getLogger(LoginController.class.getName()).log(Level.WARNING, "Login attempt failed.", ex);
-//        }
-//
-//
-//        DBConnection.makeConnection();
-//        launch(args);
-//        DBConnection.closeConnection();
-//    }
+public class main {
     public static void main(String[] args) {
-        System.out.println(WorkoutSchedule);
+
+        // create a workout
+        workout workout1 = new workout();
+        workout1.setName();
+        workout1.setStartTime(LocalTime.of(10, 0));
+
+        // create a workout schedule
+        workoutSchedule schedule = new workoutSchedule();
+
+        // add the workout to the schedule
+        schedule.addWorkout(workout1);
+
+        // update the current time
+        schedule.updateTime();
+
+        // check for reminders
+        schedule.checkForReminders();
+
+    }
 }
-}
+
+
+
+

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Timer;
 
 public class workoutSchedule {
-        private List<workout> workouts;
+        private final List<workout> workouts;
         private LocalDateTime currentTime;
 
         public workoutSchedule() {
