@@ -7,6 +7,12 @@ import model.Workout;
 import model.WorkoutHub;
 import model.WorkoutSchedule;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -26,7 +32,8 @@ public class Main {
             System.out.println("1. Add workout");
             System.out.println("2. Remove workout");
             System.out.println("3. Get workout by index");
-            System.out.println("4. Exit");
+            System.out.println("4. Video Search");
+            System.out.println("5. Exit");
 
             int option = scanner.nextInt();
 
@@ -81,6 +88,21 @@ public class Main {
                     }
                 }
                 case 4 -> {
+                    System.out.print("Enter keyword to search for video: ");
+                    String keyword = scanner.nextLine();
+
+                    try {
+                        // Encode the keyword for URL
+                        String encodedKeyword = URLEncoder.encode(keyword, StandardCharsets.UTF_8);
+
+                        // Open the default browser with the search result page
+                        String url = "https://www.youtube.com/results?search_query=" + encodedKeyword;
+                        Desktop.getDesktop().browse(new URI(url));
+                    } catch (IOException | URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+                }
+                case 5 -> {
                     System.out.println("Goodbye!");
                     System.exit(0);
                 }
