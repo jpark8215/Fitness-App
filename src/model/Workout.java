@@ -1,5 +1,6 @@
 package model;
 
+
 public class Workout {
     private String name;
     private int calories;
@@ -25,4 +26,8 @@ public class Workout {
         this.calories = calories;
     }
 
+    @Override
+    public String toString() {
+            return name;
+        }
 }

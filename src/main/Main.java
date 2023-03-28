@@ -1,6 +1,3 @@
-/**
- * @author Jieun Park
- */
 
 package main;
 import model.Workout;
@@ -44,7 +41,7 @@ public class Main {
 //                    System.out.println("Enter workout calories:");
 //                    int workoutCalories = scanner.nextInt();
                     Workout workout = new Workout(workoutName);
-                    WorkoutHub.addWorkout(workout);
+//                    WorkoutHub.addWorkout(workout);
                     System.out.println("Workout added: " + workoutName);
                     System.out.println("Do you want to set a reminder for this workout? (y/n)");
                     String option1 = scanner.next();
@@ -58,6 +55,7 @@ public class Main {
                     }
                 }
                 case 2 -> {
+                    System.out.println(WorkoutHub.getWorkoutsWithIndices());
                     System.out.println("Enter workout index to remove:");
                     int indexToRemove = scanner.nextInt();
                     if (indexToRemove >= 0 && indexToRemove < workoutHub.getNumberOfWorkouts()) {
@@ -69,7 +67,7 @@ public class Main {
                     }
                 }
                 case 3 -> {
-                    System.out.println(workoutHub.getWorkouts());
+                    System.out.println(WorkoutHub.getWorkoutsWithIndices());
                     System.out.println("Enter workout index to get:");
                     int indexToGet = scanner.nextInt();
                     if (indexToGet >= 0 && indexToGet < workoutHub.getNumberOfWorkouts()) {

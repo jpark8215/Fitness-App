@@ -19,9 +19,18 @@ public class WorkoutHub {
         workouts.remove(workout);
     }
 
-    public List<Workout> getWorkouts() {
-        return workouts;
+//    public static List<Workout> getWorkouts() {
+//        return workouts;
+//    }
+
+    public static List<String> getWorkoutsWithIndices() {
+        List<String> workoutsWithIndices = new ArrayList<>();
+        for (int i = 0; i < workouts.size(); i++) {
+            workoutsWithIndices.add("[" + i + "] " + workouts.get(i).toString());
+        }
+        return workoutsWithIndices;
     }
+
 
     public void clearWorkouts() {
         workouts.clear();
