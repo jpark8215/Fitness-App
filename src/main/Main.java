@@ -1,5 +1,5 @@
-
 package main;
+
 import model.Workout;
 import model.WorkoutHub;
 import model.WorkoutSchedule;
@@ -11,74 +11,113 @@ import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        //create a Scanner object to get input from the user, and an empty list of Workout objects. We then create a WorkoutHub object using the list of workouts
         Scanner scanner = new Scanner(System.in);
+
+        // Create an empty list of workouts
         List<Workout> workouts = new ArrayList<>();
+
+        // Create a WorkoutHub object with the list of workouts
         WorkoutHub workoutHub = new WorkoutHub(workouts);
 
-        System.out.println("Welcome to the Workout Manager!");
+        System.out.println("\nWelcome to the Workout Manager!");
 
-        //create a menu system using a while loop and a switch statement. The user can select an option by entering a number, and the program will perform the corresponding action.
         while (true) {
             System.out.println("\nSelect an option:");
             System.out.println("1. Add workout");
             System.out.println("2. Remove workout");
             System.out.println("3. Get workout by index");
-            System.out.println("4. Video Search");
-            System.out.println("5. Exit");
+            System.out.println("4. Show workout schedule");
+            System.out.println("5. Video Search");
+            System.out.println("6. Exit");
 
             int option = scanner.nextInt();
 
             switch (option) {
                 case 1 -> {
+                    // Prompt user to enter the name of the workout
                     System.out.println("Enter workout name:");
                     String workoutName = scanner.next();
-//                    System.out.println("Enter workout calories:");
-//                    int workoutCalories = scanner.nextInt();
+
+                    // Create a new Workout object with the given name
                     Workout workout = new Workout(workoutName);
-//                    WorkoutHub.addWorkout(workout);
-                    System.out.println("Workout added: " + workoutName);
+
+                    // Prompt user to set a reminder for the workout
                     System.out.println("Do you want to set a reminder for this workout? (y/n)");
                     String option1 = scanner.next();
 
-                    if (option1.equals("y")) {
-                        System.out.println("Enter reminder time (in minutes from now):");
-                        int reminderTime = scanner.nextInt();
-                        WorkoutSchedule.addWorkoutReminder(workout, reminderTime);
-                    } else {
-                        WorkoutHub.addWorkout(workout);
+                    try {
+                        if (option1.equals("y")) {
+                            // If user wants to set a reminder, prompt user to enter the reminder time
+                            System.out.println("Enter reminder time (in minutes from now):");
+                            int reminderTime = scanner.nextInt();
+
+                            // Add the workout and its reminder to the WorkoutSchedule object
+                            WorkoutSchedule.addWorkoutReminder(workout, reminderTime);
+                        } else {
+                            // If user doesn't want to set a reminder, just add the workout to the WorkoutHub object
+                            WorkoutHub.addWorkout(workout);
+                        }
+                    } catch (InputMismatchException e) {
+                        System.out.println("Error: Invalid input format. Please enter a valid number.");
+                    } catch (NullPointerException e) {
+                        System.out.println("Error: " + e.getMessage());
+                    } catch (Exception e) {
+                        System.out.println("Error: An unexpected error occurred. Please try again.");
                     }
+
+                    // Print a message indicating the workout was added
+                    System.out.println("Workout added: " + workoutName);
                 }
                 case 2 -> {
+                    // Print the list of workouts with their indices
                     System.out.println(WorkoutHub.getWorkoutsWithIndices());
+
+                    // Prompt user to enter the index of the workout to remove
                     System.out.println("Enter workout index to remove:");
                     int indexToRemove = scanner.nextInt();
+
+                    // If the index is valid, remove the workout and print a message indicating the workout was removed
                     if (indexToRemove >= 0 && indexToRemove < workoutHub.getNumberOfWorkouts()) {
                         Workout removedWorkout = workoutHub.getWorkout(indexToRemove);
                         workoutHub.removeWorkout(removedWorkout);
                         System.out.println("Workout removed: " + removedWorkout);
                     } else {
+                        // If the index is invalid, print an error message
                         System.out.println("Invalid index");
                     }
                 }
                 case 3 -> {
+                    // Print the list of workouts with
                     System.out.println(WorkoutHub.getWorkoutsWithIndices());
+
+                    // Prompt the user to enter the index of the workout they want to get
                     System.out.println("Enter workout index to get:");
                     int indexToGet = scanner.nextInt();
+
+                    // Check if the entered index is valid
                     if (indexToGet >= 0 && indexToGet < workoutHub.getNumberOfWorkouts()) {
+                        // Get the workout at the entered index
                         Workout gottenWorkout = workoutHub.getWorkout(indexToGet);
+
+                        // Print the gotten workout
                         System.out.println("Workout at index " + indexToGet + ": " + gottenWorkout);
+
+                        // Prompt the user to set a reminder for the gotten workout
                         System.out.println("Do you want to set a reminder for this workout? (y/n)");
                         String option2 = scanner.next();
 
+                        // If the user chooses to set a reminder, prompt them to enter the reminder time
                         if (option2.equals("y")) {
                             System.out.println("Enter reminder time (in minutes from now):");
                             int reminderTime = scanner.nextInt();
+
+                            // Set a reminder for the gotten workout with the entered reminder time
                             WorkoutSchedule.setReminder(gottenWorkout, reminderTime);
                         }
                     } else {
@@ -86,8 +125,13 @@ public class Main {
                     }
                 }
                 case 4 -> {
+                    // Show all workout reminders
+                    WorkoutSchedule.showWorkoutReminders();
+                }
+                case 5 -> {
+                    // Prompt the user to enter a keyword to search for on YouTube
                     System.out.print("Enter keyword to search for video: ");
-                    String keyword = scanner.nextLine();
+                    String keyword = scanner.next();
 
                     try {
                         // Encode the keyword for URL
@@ -100,11 +144,18 @@ public class Main {
                         e.printStackTrace();
                     }
                 }
-                case 5 -> {
+                case 6 -> {
                     System.out.println("Goodbye!");
                     System.exit(0);
                 }
-                default -> System.out.println("Invalid option");
+
+                default -> {
+                    try {
+                        throw new IllegalArgumentException("Invalid option");
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
+                }
             }
         }
     }

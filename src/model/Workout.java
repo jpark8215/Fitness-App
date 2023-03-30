@@ -1,15 +1,17 @@
 package model;
 
-
 public class Workout {
+    // Instance variables
     private String name;
     private int calories;
 
+    // Constructor
     public Workout(String workoutName) {
         name = workoutName;
 //        this.calories = calories;
     }
 
+    // Getter and setter methods
     public String getName() {
         return name;
     }
