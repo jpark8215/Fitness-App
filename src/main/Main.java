@@ -2,7 +2,7 @@ package main;
 
 import model.Workout;
 import model.WorkoutHub;
-import model.WorkoutSchedule;
+import model.workoutSchedule;
 
 import java.awt.*;
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class Main {
         // Create a WorkoutHub object with the list of workouts
         WorkoutHub workoutHub = new WorkoutHub(workouts);
 
-        System.out.println("\nWelcome to the Workout Manager!");
+        System.out.println("\nWelcome to your Workout Manager!");
 
         while (true) {
             System.out.println("\nSelect an option:");
@@ -58,7 +58,7 @@ public class Main {
                             int reminderTime = scanner.nextInt();
 
                             // Add the workout and its reminder to the WorkoutSchedule object
-                            WorkoutSchedule.addWorkoutReminder(workout, reminderTime);
+                            workoutSchedule.addWorkoutReminder(workout, reminderTime);
                         } else {
                             // If user doesn't want to set a reminder, just add the workout to the WorkoutHub object
                             WorkoutHub.addWorkout(workout);
@@ -118,7 +118,7 @@ public class Main {
                             int reminderTime = scanner.nextInt();
 
                             // Set a reminder for the gotten workout with the entered reminder time
-                            WorkoutSchedule.setReminder(gottenWorkout, reminderTime);
+                            workoutSchedule.addWorkoutReminder(gottenWorkout, reminderTime);
                         }
                     } else {
                         System.out.println("Invalid index");
@@ -126,7 +126,7 @@ public class Main {
                 }
                 case 4 -> {
                     // Show all workout reminders
-                    WorkoutSchedule.showWorkoutReminders();
+                    workoutSchedule.showWorkoutReminders();
                 }
                 case 5 -> {
                     // Prompt the user to enter a keyword to search for on YouTube
