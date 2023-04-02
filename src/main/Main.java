@@ -2,7 +2,7 @@ package main;
 
 import model.Workout;
 import model.WorkoutHub;
-import model.workoutSchedule;
+import model.WorkoutSchedule;
 
 import java.awt.*;
 import java.io.IOException;
@@ -58,7 +58,7 @@ public class Main {
                             int reminderTime = scanner.nextInt();
 
                             // Add the workout and its reminder to the WorkoutSchedule object
-                            workoutSchedule.addWorkoutReminder(workout, reminderTime);
+                            WorkoutSchedule.addWorkoutReminder(workout, reminderTime);
                             WorkoutHub.addWorkout(workout);
                         } else {
                             // If user doesn't want to set a reminder, just add the workout to the WorkoutHub object
@@ -119,7 +119,7 @@ public class Main {
                             int reminderTime = scanner.nextInt();
 
                             // Set a reminder for the gotten workout with the entered reminder time
-                            workoutSchedule.addWorkoutReminder(gottenWorkout, reminderTime);
+                            WorkoutSchedule.addWorkoutReminder(gottenWorkout, reminderTime);
                         }
                     } else {
                         System.out.println("Invalid index");
@@ -127,7 +127,7 @@ public class Main {
                 }
                 case 4 -> {
                     // Show all workout reminders
-                    workoutSchedule.showWorkoutReminders();
+                    WorkoutSchedule.showWorkoutReminders();
 
                     // Ask user if they want to delete a reminder
                     System.out.println("Do you want to delete a reminder? Enter 'yes' or 'no'");
@@ -140,7 +140,7 @@ public class Main {
                         scanner.nextLine(); // consume the newline character
 
                         // Delete the reminder
-                        workoutSchedule.removeWorkoutReminder(index);
+                        WorkoutSchedule.removeWorkoutReminder(index);
                         } else {
                             System.out.println("No workout found \"");
                         }

@@ -39,6 +39,21 @@ public class MediaShare {
     public void setInstagramAccount(String instagramAccount) {
         this.instagramAccount = instagramAccount;
     }
+
+    public void shareActivityIfGoalReached(ActivityTracker activityCal, int calorieBurnGoal) {
+        // Check if the calories burned during the activityCal is greater than or equal to the goal
+        if (activityCal.getCaloriesBurned() >= calorieBurnGoal) {
+            // Construct the caption for the Instagram post
+            String caption = "I just burned " + activityCal.getCaloriesBurned() + " calories during my " + activityCal.getWorkout() + " workout! #fitness #workout #calorieburn";
+
+            // Share the activityCal on Instagram
+            shareOnInstagram(caption);
+        }
+    }
+
+    private void shareOnInstagram(String caption) {
+        System.out.println("Shared on Instagram: " + caption);
+    }
 }
 
-//    MediaShare mediaShare = new MediaShare("John", "Gain 5KG", "@johndoe");
+
