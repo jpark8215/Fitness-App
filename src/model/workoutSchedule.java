@@ -11,8 +11,8 @@ public class workoutSchedule {
     private static List<workoutSchedule> workoutReminders;
 
     // Declare instance variables for workout and reminder time
-    private Workout workout;
-    private LocalDateTime reminderTime;
+    private final Workout workout;
+    private final LocalDateTime reminderTime;
 
     // Constructor that initializes the instance variables for workout and reminder time
     public workoutSchedule(Workout workout, LocalDateTime reminderTime) {
@@ -40,20 +40,30 @@ public class workoutSchedule {
         System.out.println("Reminder set for workout \"" + workout.getName() + "\" at " + reminderTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
     }
 
-    // Method to remove a workout reminder from the workoutReminders List
-    public static void removeWorkoutReminder(Workout workout) {
-        // Loop through the workoutReminders List and remove the first WorkoutReminder with the given workout
-        if (workoutReminders != null) {
-            for (int i = 0; i < workoutReminders.size(); i++) {
-                workoutSchedule reminder = workoutReminders.get(i);
-                if (reminder.workout.equals(workout)) {
-                    workoutReminders.remove(i);
-                    System.out.println("Reminder removed for workout \"" + workout.getName() + "\"");
-                    return;
-                }
-            }
+//    // Method to remove a workout reminder from the workoutReminders List
+//    public static void removeWorkoutReminder(Workout workout) {
+//        // Loop through the workoutReminders List and remove the first WorkoutReminder with the given workout
+//        if (workoutReminders != null) {
+//            for (int i = 0; i < workoutReminders.size(); i++) {
+//                workoutSchedule reminder = workoutReminders.get(i);
+//                if (reminder.workout.equals(workout)) {
+//                    workoutReminders.remove(i);
+//                    System.out.println("Reminder removed for workout \"" + workout.getName() + "\"");
+//                    return;
+//                }
+//            }
+//        }
+//        System.out.println("No reminder found for workout \"" + workout.getName() + "\"");
+//    }
+    // Method to remove a workout reminder from the workoutReminders List by index
+    public static void removeWorkoutReminder(int index) {
+        // Check if the index is within bounds of the workoutReminders List
+        if (index >= 0 && index < workoutReminders.size()) {
+            workoutSchedule reminder = workoutReminders.remove(index);
+            System.out.println("Reminder removed for workout \"" + reminder.workout.getName() + "\"");
+        } else {
+            System.out.println("Invalid index specified.");
         }
-        System.out.println("No reminder found for workout \"" + workout.getName() + "\"");
     }
 
     // Getter methods for the instance variables
@@ -70,8 +80,9 @@ public class workoutSchedule {
         try {
             System.out.println("Workout Reminders:");
             if (workoutReminders != null) {
-                for (workoutSchedule reminder : workoutReminders) {
-                    System.out.print("- " + reminder.getWorkout().getName());
+                for (int i = 0; i < workoutReminders.size(); i++) {
+                    workoutSchedule reminder = workoutReminders.get(i);
+                    System.out.print((i) + ". " + reminder.getWorkout().getName());
                     if (reminder.getReminderTime() != null) {
                         System.out.print(" (reminder set for " + reminder.getReminderTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + ")");
                     }

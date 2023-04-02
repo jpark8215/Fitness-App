@@ -48,17 +48,18 @@ public class Main {
                     Workout workout = new Workout(workoutName);
 
                     // Prompt user to set a reminder for the workout
-                    System.out.println("Do you want to set a reminder for this workout? (y/n)");
+                    System.out.println("Do you want to set a reminder for this workout? Enter 'yes' or 'no'");
                     String option1 = scanner.next();
 
                     try {
-                        if (option1.equals("y")) {
+                        if (option1.equals("yes")) {
                             // If user wants to set a reminder, prompt user to enter the reminder time
                             System.out.println("Enter reminder time (in minutes from now):");
                             int reminderTime = scanner.nextInt();
 
                             // Add the workout and its reminder to the WorkoutSchedule object
                             workoutSchedule.addWorkoutReminder(workout, reminderTime);
+                            WorkoutHub.addWorkout(workout);
                         } else {
                             // If user doesn't want to set a reminder, just add the workout to the WorkoutHub object
                             WorkoutHub.addWorkout(workout);
@@ -109,11 +110,11 @@ public class Main {
                         System.out.println("Workout at index " + indexToGet + ": " + gottenWorkout);
 
                         // Prompt the user to set a reminder for the gotten workout
-                        System.out.println("Do you want to set a reminder for this workout? (y/n)");
+                        System.out.println("Do you want to set a reminder for this workout? Enter 'yes' or 'no'");
                         String option2 = scanner.next();
 
                         // If the user chooses to set a reminder, prompt them to enter the reminder time
-                        if (option2.equals("y")) {
+                        if (option2.equals("yes")) {
                             System.out.println("Enter reminder time (in minutes from now):");
                             int reminderTime = scanner.nextInt();
 
@@ -127,7 +128,24 @@ public class Main {
                 case 4 -> {
                     // Show all workout reminders
                     workoutSchedule.showWorkoutReminders();
-                }
+
+                    // Ask user if they want to delete a reminder
+                    System.out.println("Do you want to delete a reminder? Enter 'yes' or 'no'");
+                    String option3 = scanner.next();
+
+                    if (option3.equalsIgnoreCase("yes")) {
+                        // Ask user which reminder to delete
+                        System.out.println("Enter the index of the reminder you want to delete:");
+                        int index = scanner.nextInt();
+                        scanner.nextLine(); // consume the newline character
+
+                        // Delete the reminder
+                        workoutSchedule.removeWorkoutReminder(index);
+                        } else {
+                            System.out.println("No workout found \"");
+                        }
+                    }
+
                 case 5 -> {
                     // Prompt the user to enter a keyword to search for on YouTube
                     System.out.print("Enter keyword to search for video: ");
