@@ -3,69 +3,94 @@ package model;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WorkoutSchedule {
-    // Declare a static Map that will store the workout reminders and their corresponding reminder times
-    private static Map<Workout, LocalDateTime> workoutReminders;
+    // Declare a static List that will store the workout reminders
+    private static List<WorkoutSchedule> workoutReminders;
 
-    // Constructor that initializes the workoutReminders Map
-    public WorkoutSchedule() {
-        workoutReminders = new HashMap<>();
+    // Declare instance variables for workout and reminder time
+    private final Workout workout;
+    private final LocalDateTime reminderTime;
+
+    // Constructor that initializes the instance variables for workout and reminder time
+    public WorkoutSchedule(Workout workout, LocalDateTime reminderTime) {
+        this.workout = workout;
+        this.reminderTime = reminderTime;
     }
 
-    // Method to add a workout reminder to the workoutReminders Map
+    // Method to add a workout reminder to the workoutReminders List
     public static void addWorkoutReminder(Workout workout, int reminderTimeMinutes) {
-        // Create a new HashMap to store the workout reminder
-        workoutReminders = new HashMap<>();
-
         // Calculate the reminder time based on the current time and the given reminder time in minutes
         LocalDateTime reminderTime = LocalDateTime.now().plus(Duration.ofMinutes(reminderTimeMinutes));
 
-        // Add the workout and its reminder time to the workoutReminders Map
-        workoutReminders.put(workout, reminderTime);
+        // Create a new WorkoutReminder object with the given workout and reminder time
+        WorkoutSchedule reminder = new WorkoutSchedule(workout, reminderTime);
+
+        // Initialize the workoutReminders List if it hasn't been created yet
+        if (workoutReminders == null) {
+            workoutReminders = new ArrayList<>();
+        }
+
+        // Add the WorkoutReminder to the workoutReminders List
+        workoutReminders.add(reminder);
 
         // Print a confirmation message to the console
         System.out.println("Reminder set for workout \"" + workout.getName() + "\" at " + reminderTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
     }
 
-    // Method to set a workout reminder for a previously added workout
-    public static void setReminder(Workout workout, int reminderTimeMinutes) {
-        // Create a new HashMap to store the updated workout reminder
-        workoutReminders = new HashMap<>();
-
-        // Calculate the updated reminder time based on the current time and the given reminder time in minutes
-        LocalDateTime reminderTime = LocalDateTime.now().plus(Duration.ofMinutes(reminderTimeMinutes));
-
-        // Update the workout reminder in the workoutReminders Map
-        workoutReminders.put(workout, reminderTime);
-
-        // Print a confirmation message to the console
-        System.out.println("Reminder set for workout \"" + workout.getName() + "\" at " + reminderTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+//    // Method to remove a workout reminder from the workoutReminders List
+//    public static void removeWorkoutReminder(Workout workout) {
+//        // Loop through the workoutReminders List and remove the first WorkoutReminder with the given workout
+//        if (workoutReminders != null) {
+//            for (int i = 0; i < workoutReminders.size(); i++) {
+//                workoutSchedule reminder = workoutReminders.get(i);
+//                if (reminder.workout.equals(workout)) {
+//                    workoutReminders.remove(i);
+//                    System.out.println("Reminder removed for workout \"" + workout.getName() + "\"");
+//                    return;
+//                }
+//            }
+//        }
+//        System.out.println("No reminder found for workout \"" + workout.getName() + "\"");
+//    }
+    // Method to remove a workout reminder from the workoutReminders List by index
+    public static void removeWorkoutReminder(int index) {
+        // Check if the index is within bounds of the workoutReminders List
+        if (index >= 0 && index < workoutReminders.size()) {
+            WorkoutSchedule reminder = workoutReminders.remove(index);
+            System.out.println("Reminder removed for workout \"" + reminder.workout.getName() + "\"");
+        } else {
+            System.out.println("Invalid index specified.");
+        }
     }
 
-    // Method to remove a workout and its corresponding reminder from the workoutReminders Map
-    public void removeWorkout(Workout workout) {
-        workoutReminders.remove(workout);
+    // Getter methods for the instance variables
+    public Workout getWorkout() {
+        return workout;
     }
 
-    // Method to display all the workout reminders and their corresponding reminder times in the workoutReminders Map
+    public LocalDateTime getReminderTime() {
+        return reminderTime;
+    }
+
+    // Method to display all the workout reminders in the workoutReminders List
     public static void showWorkoutReminders() {
         try {
             System.out.println("Workout Reminders:");
-            for (Map.Entry<Workout, LocalDateTime> entry : workoutReminders.entrySet()) {
-                Workout workout = entry.getKey();
-                LocalDateTime reminderTime = entry.getValue();
-                System.out.print("- " + workout.getName());
-                if (reminderTime != null) {
-                    System.out.print(" (reminder set for " + reminderTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + ")");
+            if (workoutReminders != null) {
+                for (int i = 0; i < workoutReminders.size(); i++) {
+                    WorkoutSchedule reminder = workoutReminders.get(i);
+                    System.out.print((i) + ". " + reminder.getWorkout().getName());
+                    if (reminder.getReminderTime() != null) {
+                        System.out.print(" (reminder set for " + reminder.getReminderTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + ")");
+                    }
+                    System.out.println();
                 }
-                System.out.println();
             }
         } catch (NullPointerException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
-
 }
