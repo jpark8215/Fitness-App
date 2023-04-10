@@ -1,5 +1,11 @@
 package main;
 
+import controller.LoginController;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import model.Workout;
 import model.WorkoutHub;
 import model.WorkoutSchedule;
@@ -10,13 +16,23 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
+import java.util.*;
 import java.util.List;
-import java.util.Scanner;
 
-public class Main {
+public class Main extends Application {
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/Login.fxml")));
+        primaryStage.setTitle("Fit");
+        primaryStage.setScene(new Scene(root, 800, 400));
+        primaryStage.show();
+    }
+
     public static void main(String[] args) {
+
+
+        launch(args);
+
         Scanner scanner = new Scanner(System.in);
 
         // Create an empty list of workouts
@@ -141,10 +157,10 @@ public class Main {
 
                         // Delete the reminder
                         WorkoutSchedule.removeWorkoutReminder(index);
-                        } else {
-                            System.out.println("No workout found \"");
-                        }
+                    } else {
+                        System.out.println("No workout found \"");
                     }
+                }
 
                 case 5 -> {
                     // Prompt the user to enter a keyword to search for on YouTube
