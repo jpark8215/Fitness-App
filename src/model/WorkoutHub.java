@@ -17,6 +17,11 @@ public class WorkoutHub {
         workouts.remove(workout);
     }
 
+    // Method to clear all workouts from the list
+    public void clearWorkouts() {
+        workouts.clear();
+    }
+
     // Method to get a list of all workouts, with each workout's index displayed
     public static List<String> getWorkoutsWithIndices() {
         List<String> workoutsWithIndices = new ArrayList<>();
@@ -25,11 +30,6 @@ public class WorkoutHub {
             workoutsWithIndices.add("[" + i + "] " + workouts.get(i).toString());
         }
         return workoutsWithIndices;
-    }
-
-    // Method to clear all workouts from the list
-    public void clearWorkouts() {
-        workouts.clear();
     }
 
     // Method to get the number of workouts in the list

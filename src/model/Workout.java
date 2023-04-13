@@ -1,23 +1,32 @@
 package model;
 
+
 public class Workout {
     // Instance variables
-    private String name;
+    private int indices;
+    private String names;
     private int calories;
 
     // Constructor
     public Workout(String workoutName) {
-        name = workoutName;
-//        this.calories = calories;
+        names = workoutName;
     }
 
     // Getter and setter methods
-    public String getName() {
-        return name;
+    public int getIndices() {
+        return indices;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setIndices(int indices) {
+        this.indices = indices;
+    }
+
+    public String getNames() {
+        return names;
+    }
+
+    public void setNames(String names) {
+        this.names = names;
     }
 
     public int getCalories() {
@@ -30,6 +39,8 @@ public class Workout {
 
     @Override
     public String toString() {
-            return name;
+            return names;
         }
+
+
 }

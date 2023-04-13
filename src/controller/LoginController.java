@@ -1,7 +1,7 @@
 package controller;
 
 //import database.DBConnection;
-import javafx.collections.FXCollections;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,18 +16,11 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.logging.FileHandler;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 
 /**

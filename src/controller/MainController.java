@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import model.WorkoutHub;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -36,6 +39,7 @@ public class MainController {
 
     @FXML
     void addWorkout(ActionEvent event) throws IOException {
+
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/AddWorkout.fxml")));
         stage.setScene(new Scene(scene));
