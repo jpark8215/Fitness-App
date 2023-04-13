@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
 
     <children>
         <Label layoutX="86.0" layoutY="98.0" text="Trick9 Fitness" textAlignment="CENTER">
@@ -17,7 +17,7 @@
         <TextField fx:id="usernameField" layoutX="83.0" layoutY="279.0" promptText="Username" />
         <TextField fx:id="passwordField" layoutX="83.0" layoutY="310.0" promptText="Password" />
         <Button fx:id="loginButton" layoutX="113.0" layoutY="353.0" mnemonicParsing="false" onAction="#loginHandler" prefHeight="25.0" prefWidth="75.0" text="Login" textAlignment="CENTER" />
-        <Label fx:id="timeZone" layoutX="114.0" layoutY="164.0" prefHeight="17.0" prefWidth="87.0" text="User Location" textAlignment="CENTER" />
+        <Label fx:id="timeZone" layoutX="114.0" layoutY="164.0" prefHeight="17.0" prefWidth="120.0" text="User Location" textAlignment="CENTER" />
     </children>
 
 </AnchorPane>

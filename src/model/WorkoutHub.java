@@ -6,16 +6,8 @@ import java.util.List;
 public class WorkoutHub {
 
     // Define a static List of Workout objects
-    private static List<Workout> workouts;
+    private static final List<Workout> workouts = new ArrayList<>();
 
-    // Constructor that initializes the list of workouts
-    public WorkoutHub(List<Workout> workouts) {
-        // Initialize the workouts list with a new ArrayList object
-        // Note that this creates a new empty list and discards the provided workouts parameter
-        WorkoutHub.workouts = new ArrayList<>();
-    }
-
-    // Method to add a Workout object to the list of workouts
     public static void addWorkout(Workout workout) {
         workouts.add(workout);
     }

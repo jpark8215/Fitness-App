@@ -24,7 +24,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/Login.fxml")));
         primaryStage.setTitle("Fit");
-        primaryStage.setScene(new Scene(root, 800, 400));
+        primaryStage.setScene(new Scene(root, 400, 600));
         primaryStage.show();
     }
 
@@ -39,7 +39,7 @@ public class Main extends Application {
         List<Workout> workouts = new ArrayList<>();
 
         // Create a WorkoutHub object with the list of workouts
-        WorkoutHub workoutHub = new WorkoutHub(workouts);
+        WorkoutHub workoutHubList = new WorkoutHub();
 
         System.out.println("\nWelcome to your Workout Manager!");
 
@@ -100,9 +100,9 @@ public class Main extends Application {
                     int indexToRemove = scanner.nextInt();
 
                     // If the index is valid, remove the workout and print a message indicating the workout was removed
-                    if (indexToRemove >= 0 && indexToRemove < workoutHub.getNumberOfWorkouts()) {
-                        Workout removedWorkout = workoutHub.getWorkout(indexToRemove);
-                        workoutHub.removeWorkout(removedWorkout);
+                    if (indexToRemove >= 0 && indexToRemove < workoutHubList.getNumberOfWorkouts()) {
+                        Workout removedWorkout = workoutHubList.getWorkout(indexToRemove);
+                        workoutHubList.removeWorkout(removedWorkout);
                         System.out.println("Workout removed: " + removedWorkout);
                     } else {
                         // If the index is invalid, print an error message
@@ -118,9 +118,9 @@ public class Main extends Application {
                     int indexToGet = scanner.nextInt();
 
                     // Check if the entered index is valid
-                    if (indexToGet >= 0 && indexToGet < workoutHub.getNumberOfWorkouts()) {
+                    if (indexToGet >= 0 && indexToGet < workoutHubList.getNumberOfWorkouts()) {
                         // Get the workout at the entered index
-                        Workout gottenWorkout = workoutHub.getWorkout(indexToGet);
+                        Workout gottenWorkout = workoutHubList.getWorkout(indexToGet);
 
                         // Print the gotten workout
                         System.out.println("Workout at index " + indexToGet + ": " + gottenWorkout);
@@ -172,7 +172,7 @@ public class Main extends Application {
                         String encodedKeyword = URLEncoder.encode(keyword, StandardCharsets.UTF_8);
 
                         // Open the default browser with the search result page
-                        String url = "https://www.youtube.com/results?search_query=" + encodedKeyword;
+                        String url = "https://www.youtube.com/results?search_query=" + encodedKeyword + " workout";
                         Desktop.getDesktop().browse(new URI(url));
                     } catch (IOException | URISyntaxException e) {
                         e.printStackTrace();
