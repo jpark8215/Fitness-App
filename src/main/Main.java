@@ -1,6 +1,5 @@
 package main;
 
-import controller.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,8 +15,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 public class Main extends Application {
     @Override
@@ -93,7 +92,7 @@ public class Main extends Application {
                 }
                 case 2 -> {
                     // Print the list of workouts with their indices
-                    System.out.println(WorkoutHub.getWorkoutsWithIndices());
+                    System.out.println(WorkoutHub.getWorkoutList());
 
                     // Prompt user to enter the index of the workout to remove
                     System.out.println("Enter workout index to remove:");
@@ -101,7 +100,7 @@ public class Main extends Application {
 
                     // If the index is valid, remove the workout and print a message indicating the workout was removed
                     if (indexToRemove >= 0 && indexToRemove < workoutHubList.getNumberOfWorkouts()) {
-                        Workout removedWorkout = workoutHubList.getWorkout(indexToRemove);
+                        Workout removedWorkout = workoutHubList.getWorkoutByIndex(indexToRemove);
                         workoutHubList.removeWorkout(removedWorkout);
                         System.out.println("Workout removed: " + removedWorkout);
                     } else {
@@ -111,7 +110,7 @@ public class Main extends Application {
                 }
                 case 3 -> {
                     // Print the list of workouts with
-                    System.out.println(WorkoutHub.getWorkoutsWithIndices());
+                    System.out.println(WorkoutHub.getWorkoutList());
 
                     // Prompt the user to enter the index of the workout they want to get
                     System.out.println("Enter workout index to get:");
@@ -120,7 +119,7 @@ public class Main extends Application {
                     // Check if the entered index is valid
                     if (indexToGet >= 0 && indexToGet < workoutHubList.getNumberOfWorkouts()) {
                         // Get the workout at the entered index
-                        Workout gottenWorkout = workoutHubList.getWorkout(indexToGet);
+                        Workout gottenWorkout = workoutHubList.getWorkoutByIndex(indexToGet);
 
                         // Print the gotten workout
                         System.out.println("Workout at index " + indexToGet + ": " + gottenWorkout);
@@ -158,9 +157,10 @@ public class Main extends Application {
                         // Delete the reminder
                         WorkoutSchedule.removeWorkoutReminder(index);
                     } else {
-                        System.out.println("No workout found \"");
+                        System.out.println("Error");
                     }
                 }
+
 
                 case 5 -> {
                     // Prompt the user to enter a keyword to search for on YouTube

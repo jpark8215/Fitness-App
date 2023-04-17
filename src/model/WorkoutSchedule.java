@@ -1,5 +1,7 @@
 package model;
 
+import main.Main;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -37,30 +39,15 @@ public class WorkoutSchedule {
         workoutReminders.add(reminder);
 
         // Print a confirmation message to the console
-        System.out.println("Reminder set for workout \"" + workout.getNames() + "\" at " + reminderTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        System.out.println("Reminder set for workout \"" + workout.getWorkoutName() + "\" at " + reminderTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
     }
 
-//    // Method to remove a workout reminder from the workoutReminders List
-//    public static void removeWorkoutReminder(Workout workout) {
-//        // Loop through the workoutReminders List and remove the first WorkoutReminder with the given workout
-//        if (workoutReminders != null) {
-//            for (int i = 0; i < workoutReminders.size(); i++) {
-//                workoutSchedule reminder = workoutReminders.get(i);
-//                if (reminder.workout.equals(workout)) {
-//                    workoutReminders.remove(i);
-//                    System.out.println("Reminder removed for workout \"" + workout.getName() + "\"");
-//                    return;
-//                }
-//            }
-//        }
-//        System.out.println("No reminder found for workout \"" + workout.getName() + "\"");
-//    }
     // Method to remove a workout reminder from the workoutReminders List by index
     public static void removeWorkoutReminder(int index) {
         // Check if the index is within bounds of the workoutReminders List
         if (index >= 0 && index < workoutReminders.size()) {
             WorkoutSchedule reminder = workoutReminders.remove(index);
-            System.out.println("Reminder removed for workout \"" + reminder.workout.getNames() + "\"");
+            System.out.println("Reminder removed for workout \"" + reminder.workout.getWorkoutName() + "\"");
         } else {
             System.out.println("Invalid index specified.");
         }
@@ -75,19 +62,21 @@ public class WorkoutSchedule {
         return reminderTime;
     }
 
-    // Method to display all the workout reminders in the workoutReminders List
+
     public static void showWorkoutReminders() {
         try {
             System.out.println("Workout Reminders:");
             if (workoutReminders != null) {
                 for (int i = 0; i < workoutReminders.size(); i++) {
                     WorkoutSchedule reminder = workoutReminders.get(i);
-                    System.out.print((i) + ". " + reminder.getWorkout().getNames());
+                    System.out.print((i) + ". " + reminder.getWorkout().getWorkoutName());
                     if (reminder.getReminderTime() != null) {
                         System.out.print(" (reminder set for " + reminder.getReminderTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + ")");
                     }
                     System.out.println();
                 }
+            } else {
+                System.out.println("No workout found.");
             }
         } catch (NullPointerException e) {
             System.out.println("Error: " + e.getMessage());

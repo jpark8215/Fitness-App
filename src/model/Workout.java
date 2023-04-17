@@ -4,12 +4,13 @@ package model;
 public class Workout {
     // Instance variables
     private int indices;
-    private String names;
+    private String workoutName;
     private int calories;
 
     // Constructor
     public Workout(String workoutName) {
-        names = workoutName;
+        this.workoutName = workoutName;
+        this.calories = 0; // default value for calories
     }
 
     // Getter and setter methods
@@ -21,12 +22,12 @@ public class Workout {
         this.indices = indices;
     }
 
-    public String getNames() {
-        return names;
+    public String getWorkoutName() {
+        return workoutName;
     }
 
-    public void setNames(String names) {
-        this.names = names;
+    public void setWorkoutName(String workoutName) {
+        this.workoutName = workoutName;
     }
 
     public int getCalories() {
@@ -39,8 +40,7 @@ public class Workout {
 
     @Override
     public String toString() {
-            return names;
-        }
-
+        return workoutName + ", " + calories + " calories";
+    }
 
 }
