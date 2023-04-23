@@ -15,8 +15,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.*;
+import java.util.InputMismatchException;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class Main extends Application {
     @Override
@@ -29,13 +30,12 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-
         launch(args);
 
         Scanner scanner = new Scanner(System.in);
 
-        // Create an empty list of workouts
-        List<Workout> workouts = new ArrayList<>();
+//        // Create an empty list of workouts
+//        List<Workout> workouts = new ArrayList<>();
 
         // Create a WorkoutHub object with the list of workouts
         WorkoutHub workoutHubList = new WorkoutHub();

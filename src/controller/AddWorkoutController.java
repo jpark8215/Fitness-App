@@ -18,9 +18,7 @@ import model.Workout;
 import model.WorkoutHub;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
 
 public class AddWorkoutController {
@@ -39,6 +37,9 @@ public class AddWorkoutController {
     private Button saveButton;
 
     @FXML
+    private Button mainButton;
+
+    @FXML
     private AnchorPane workoutField;
 
     @FXML
@@ -51,7 +52,15 @@ public class AddWorkoutController {
     private TextField workoutTextField;
 
     @FXML
-    void saveHandler(ActionEvent event) throws IOException {
+    void mainButtonHandler(ActionEvent event) throws IOException {
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/Main.fxml")));
+        stage.setScene(new Scene(scene));
+        stage.show();
+    }
+
+    @FXML
+    void saveButtonHandler(ActionEvent event) throws IOException {
 
         // Get workout Name and feed into constructor
         String workoutName = workoutTextField.getText();
