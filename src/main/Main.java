@@ -15,9 +15,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
+
 
 public class Main extends Application {
     @Override
@@ -33,9 +36,6 @@ public class Main extends Application {
         launch(args);
 
         Scanner scanner = new Scanner(System.in);
-
-//        // Create an empty list of workouts
-//        List<Workout> workouts = new ArrayList<>();
 
         // Create a WorkoutHub object with the list of workouts
         WorkoutHub workoutHubList = new WorkoutHub();
@@ -69,11 +69,16 @@ public class Main extends Application {
                     try {
                         if (option1.equals("yes")) {
                             // If user wants to set a reminder, prompt user to enter the reminder time
-                            System.out.println("Enter reminder time (in minutes from now):");
-                            int reminderTime = scanner.nextInt();
+                            System.out.println("Enter reminder date (YYYY-MM-DD):");
+                            String reminderDateInput = scanner.next();
+                            LocalDate reminderDate = LocalDate.parse(reminderDateInput);
+
+                            System.out.println("Enter reminder time (HH:MM):");
+                            String reminderTimeInput = scanner.next();
+                            LocalTime reminderTime = LocalTime.parse(reminderTimeInput);
 
                             // Add the workout and its reminder to the WorkoutSchedule object
-                            WorkoutSchedule.addWorkoutReminder(workout, reminderTime);
+                            WorkoutSchedule.addWorkoutReminder(workout, reminderDate, reminderTime);
                             WorkoutHub.addWorkout(workout);
                         } else {
                             // If user doesn't want to set a reminder, just add the workout to the WorkoutHub object
@@ -130,12 +135,18 @@ public class Main extends Application {
 
                         // If the user chooses to set a reminder, prompt them to enter the reminder time
                         if (option2.equals("yes")) {
-                            System.out.println("Enter reminder time (in minutes from now):");
-                            int reminderTime = scanner.nextInt();
+                            System.out.println("Enter reminder date (YYYY-MM-DD):");
+                            String reminderDateInput = scanner.next();
+                            LocalDate reminderDate = LocalDate.parse(reminderDateInput);
 
-                            // Set a reminder for the gotten workout with the entered reminder time
-                            WorkoutSchedule.addWorkoutReminder(gottenWorkout, reminderTime);
+                            System.out.println("Enter reminder time (HH:MM):");
+                            String reminderTimeInput = scanner.next();
+                            LocalTime reminderTime = LocalTime.parse(reminderTimeInput);
+
+                            // Set a reminder for the gotten workout with the entered reminder date and time
+                            WorkoutSchedule.addWorkoutReminder(gottenWorkout, reminderDate, reminderTime);
                         }
+
                     } else {
                         System.out.println("Invalid index");
                     }

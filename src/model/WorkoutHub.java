@@ -17,7 +17,7 @@ public class WorkoutHub {
     }
 
     // Method to remove a Workout object from the list of workouts
-    public void removeWorkout(Workout workout) {
+    public static void removeWorkout(Workout workout) {
         workouts.remove(workout);
     }
 
@@ -28,8 +28,10 @@ public class WorkoutHub {
 
     // Method to get a list of all workouts, with each workout's index displayed
     public static List<String> getWorkoutList() {
+        // Create a new List to store the information of all workouts
         List<String> workoutList = new ArrayList<>();
 
+        // Loop through all workouts in the workouts List
         for (int i = 0; i < workouts.size(); i++) {
             Workout workout = workouts.get(i);
             String workoutInfo = "\n" + i + ". " + workout.getWorkoutName() + " : " + workout.getCalories() + " calories";
@@ -37,7 +39,6 @@ public class WorkoutHub {
         }
         return workoutList ;
     }
-
 
     // Method to get the number of workouts in the list
     public int getNumberOfWorkouts() {
@@ -49,10 +50,10 @@ public class WorkoutHub {
         return workouts.get(index);
     }
 
-
+    // Method to get an observable list of all workouts
     public static ObservableList<Workout> getWorkoutObservableList() {
+        // Create a new ObservableList to store all workouts
         ObservableList<Workout> workoutObservableList = FXCollections.observableArrayList();
-
         workoutObservableList.addAll(workouts);
 
         return workoutObservableList;

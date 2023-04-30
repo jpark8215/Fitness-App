@@ -1,14 +1,15 @@
 package model;
 
-
-//Class to store fitness activity data
+// Class to store fitness activity data
 public class ActivityTracker {
-    private String workout; //Activity name
-    private int duration; //Duration of activity in minutes
-    private int intensity; //Intensity of activity on a scale of 1-10
-    private int caloriesBurned; //Calories burned during activity
 
-    //Constructors
+    // Instance variables
+    private String workout; // Activity name
+    private int duration; // Duration of activity in minutes
+    private int intensity; // Intensity of activity on a scale of 1-10
+    private int caloriesBurned; // Calories burned during activity
+
+    // Constructor
     public ActivityTracker(String n, int d, int i, int c) {
         workout = n;
         duration = d;
@@ -16,7 +17,7 @@ public class ActivityTracker {
         caloriesBurned = c;
     }
 
-    //Accessors
+    // Getters
     public String getWorkout() {
         return workout;
     }
@@ -33,8 +34,7 @@ public class ActivityTracker {
         return caloriesBurned;
     }
 
-    //Mutators
-
+    // Setters
     public void setWorkout(String workout) {
         this.workout = workout;
     }
@@ -52,4 +52,3 @@ public class ActivityTracker {
     }
 
 }
-

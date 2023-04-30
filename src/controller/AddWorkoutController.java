@@ -26,31 +26,29 @@ public class AddWorkoutController {
     Stage stage;
     Parent scene;
 
-
+    // Table columns for the workout table
     @FXML
     private TableColumn<Workout, Integer> calorieCol;
-
     @FXML
     private TableColumn<Workout, Integer> indexCol;
-
-    @FXML
-    private Button saveButton;
-
-    @FXML
-    private Button mainButton;
-
-    @FXML
-    private AnchorPane workoutField;
-
     @FXML
     private TableColumn<Workout, String> workoutNameCol;
 
+    // Buttons and text fields
     @FXML
-    private TableView<Workout> workoutTable;
-
+    private Button saveButton;
+    @FXML
+    private Button mainButton;
+    @FXML
+    private AnchorPane workoutField;
     @FXML
     private TextField workoutTextField;
 
+    // Table view for displaying workouts
+    @FXML
+    private TableView<Workout> workoutTable;
+
+    // Event handler for main button that returns the user to the main menu
     @FXML
     void mainButtonHandler(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -59,6 +57,7 @@ public class AddWorkoutController {
         stage.show();
     }
 
+    // Event handler for save button that adds a new workout to the workout list
     @FXML
     void saveButtonHandler(ActionEvent event) throws IOException {
 
@@ -87,5 +86,22 @@ public class AddWorkoutController {
         indexCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getIndices()));
 
     }
+
+    // Initialize the controller
+    @FXML
+    void initialize() {
+        // Create a new observable list and add all the workouts to it
+        ObservableList<Workout> workoutObservableList = FXCollections.observableArrayList();
+        workoutObservableList.addAll(WorkoutHub.getWorkoutObservableList());
+
+        // Set the workoutTable items to the new observable list
+        workoutTable.setItems(workoutObservableList);
+
+        // Set the cell value factories for the columns
+        calorieCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getCalories()));
+        workoutNameCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getWorkoutName()));
+        indexCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getIndices()));
+    }
+
 
 }
