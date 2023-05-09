@@ -11,6 +11,16 @@ public class WorkoutHub {
     // Define a static List of Workout objects
     private static final List<Workout> workouts = new ArrayList<>();
 
+    // Method to get the number of workouts in the list
+    public int getNumberOfWorkouts() {
+        return workouts.size();
+    }
+
+    // Method to get a Workout object at a specific index in the list
+    public Workout getWorkoutByIndex(int index) {
+        return workouts.get(index);
+    }
+
     // Method to add a Workout object to the list of workouts
     public static void addWorkout(Workout workout) {
         workouts.add(workout);
@@ -21,10 +31,6 @@ public class WorkoutHub {
         workouts.remove(workout);
     }
 
-    // Method to clear all workouts from the list
-    public void clearWorkouts() {
-        workouts.clear();
-    }
 
     // Method to get a list of all workouts, with each workout's index displayed
     public static List<String> getWorkoutList() {
@@ -38,16 +44,6 @@ public class WorkoutHub {
             workoutList.add(workoutInfo);
         }
         return workoutList ;
-    }
-
-    // Method to get the number of workouts in the list
-    public int getNumberOfWorkouts() {
-        return workouts.size();
-    }
-
-    // Method to get a Workout object at a specific index in the list
-    public Workout getWorkoutByIndex(int index) {
-        return workouts.get(index);
     }
 
     // Method to get an observable list of all workouts

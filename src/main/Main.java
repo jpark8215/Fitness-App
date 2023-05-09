@@ -16,6 +16,7 @@ import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.InputMismatchException;
 import java.util.Objects;
@@ -23,14 +24,6 @@ import java.util.Scanner;
 
 
 public class Main extends Application {
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/Login.fxml")));
-        primaryStage.setTitle("Fit");
-        primaryStage.setScene(new Scene(root, 400, 600));
-        primaryStage.show();
-    }
-
     public static void main(String[] args) {
 
         launch(args);
@@ -54,6 +47,7 @@ public class Main extends Application {
             int option = scanner.nextInt();
 
             switch (option) {
+
                 case 1 -> {
                     // Prompt user to enter the name of the workout
                     System.out.println("Enter workout name:");
@@ -68,7 +62,7 @@ public class Main extends Application {
 
                     try {
                         if (option1.equals("yes")) {
-                            // If user wants to set a reminder, prompt user to enter the reminder time
+                            // If user wants to set a reminder, prompt user to enter the reminder date and time
                             System.out.println("Enter reminder date (YYYY-MM-DD):");
                             String reminderDateInput = scanner.next();
                             LocalDate reminderDate = LocalDate.parse(reminderDateInput);
@@ -77,8 +71,11 @@ public class Main extends Application {
                             String reminderTimeInput = scanner.next();
                             LocalTime reminderTime = LocalTime.parse(reminderTimeInput);
 
+                            // Combine the reminder date and time into a LocalDateTime object
+                            LocalDateTime reminderDateTime = LocalDateTime.of(reminderDate, reminderTime);
+
                             // Add the workout and its reminder to the WorkoutSchedule object
-                            WorkoutSchedule.addWorkoutReminder(workout, reminderDate, reminderTime);
+                            WorkoutSchedule.addWorkoutReminder(workout, reminderDateTime);
                             WorkoutHub.addWorkout(workout);
                         } else {
                             // If user doesn't want to set a reminder, just add the workout to the WorkoutHub object
@@ -95,6 +92,7 @@ public class Main extends Application {
                     // Print a message indicating the workout was added
                     System.out.println("Workout added: " + workoutName);
                 }
+
                 case 2 -> {
                     // Print the list of workouts with their indices
                     System.out.println(WorkoutHub.getWorkoutList());
@@ -143,14 +141,19 @@ public class Main extends Application {
                             String reminderTimeInput = scanner.next();
                             LocalTime reminderTime = LocalTime.parse(reminderTimeInput);
 
+                            // Combine the reminder date and time into a LocalDateTime object
+                            LocalDateTime reminderDateTime = LocalDateTime.of(reminderDate, reminderTime);
+
+
                             // Set a reminder for the gotten workout with the entered reminder date and time
-                            WorkoutSchedule.addWorkoutReminder(gottenWorkout, reminderDate, reminderTime);
+                            WorkoutSchedule.addWorkoutReminder(gottenWorkout, LocalDateTime.from(reminderDateTime));
                         }
 
                     } else {
                         System.out.println("Invalid index");
                     }
                 }
+
                 case 4 -> {
                     // Show all workout reminders
                     WorkoutSchedule.showWorkoutReminders();
@@ -189,6 +192,7 @@ public class Main extends Application {
                         e.printStackTrace();
                     }
                 }
+
                 case 6 -> {
                     System.out.println("Goodbye!");
                     System.exit(0);
@@ -203,5 +207,13 @@ public class Main extends Application {
                 }
             }
         }
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/Login.fxml")));
+        primaryStage.setTitle("Fit");
+        primaryStage.setScene(new Scene(root, 400, 600));
+        primaryStage.show();
     }
 }

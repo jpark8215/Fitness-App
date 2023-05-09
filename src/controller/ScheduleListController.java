@@ -1,6 +1,5 @@
 package controller;
 
-import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,29 +7,26 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.Workout;
-import model.WorkoutHub;
 import model.WorkoutSchedule;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+import java.util.Optional;
 
 public class ScheduleListController {
     Stage stage;
     Parent scene;
     @FXML
-    private TableColumn<WorkoutSchedule, Integer> indexCol;
+    private Button mainButton;
 
     @FXML
-    private Button mainButton;
+    private Button removeButton;
 
     @FXML
     private AnchorPane scheduleField;
@@ -54,18 +50,53 @@ public class ScheduleListController {
     }
 
     @FXML
+    void removeButtonHandler(ActionEvent event) {
+        // Get the selected workout from the table
+        WorkoutSchedule selectedSchedule = scheduleTable.getSelectionModel().getSelectedItem();
+        if (selectedSchedule != null) {
+            // Display a confirmation dialog to confirm deletion
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this workout reminder?", ButtonType.YES, ButtonType.NO);
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.YES) {
+                // User selected delete, remove the workout
+                WorkoutSchedule.removeReminder(selectedSchedule);
+                scheduleTable.getItems().remove(selectedSchedule);
+
+            }
+        }
+    }
+
+    @FXML
     void initialize() {
         // Create a new observable list and add all the workouts to it
         ObservableList<WorkoutSchedule> scheduleObservableList = FXCollections.observableArrayList();
         scheduleObservableList.addAll(WorkoutSchedule.getScheduleObservableList());
-        scheduleTable.setItems(scheduleObservableList);
 
-        // Set up the columns in the table
-        indexCol.setCellValueFactory(new PropertyValueFactory<>("index"));
-        timeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
-        workoutNameCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().equals(workoutNameCol)).asString());
+        // Check if the schedule list is empty
+        if (scheduleObservableList.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "There are no scheduled workouts.");
+            alert.showAndWait();
+        } else {
+            // Set up the table with the schedule list
+            scheduleTable.setItems(scheduleObservableList);
+
+            // Set up the columns in the table
+            workoutNameCol.setCellValueFactory(new PropertyValueFactory<>("workout"));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
+            timeCol.setCellValueFactory(new PropertyValueFactory<>("reminderDateTime"));
+            timeCol.setCellFactory(col -> new TableCell<WorkoutSchedule, LocalDateTime>() {
+                @Override
+                protected void updateItem(LocalDateTime item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText(null);
+                    } else {
+                        setText(item.format(formatter));
+                    }
+                }
+            });
+        }
+    }
 
     }
 
-
-}
