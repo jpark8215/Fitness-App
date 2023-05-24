@@ -104,7 +104,7 @@ public class Main extends Application {
                     // If the index is valid, remove the workout and print a message indicating the workout was removed
                     if (indexToRemove >= 0 && indexToRemove < workoutHubList.getNumberOfWorkouts()) {
                         Workout removedWorkout = workoutHubList.getWorkoutByIndex(indexToRemove);
-                        workoutHubList.removeWorkout(removedWorkout);
+                        WorkoutHub.removeWorkout(removedWorkout);
                         System.out.println("Workout removed: " + removedWorkout);
                     } else {
                         // If the index is invalid, print an error message

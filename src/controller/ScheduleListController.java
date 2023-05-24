@@ -58,10 +58,12 @@ public class ScheduleListController {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this workout reminder?", ButtonType.YES, ButtonType.NO);
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.YES) {
-                // User selected delete, remove the workout
-                WorkoutSchedule.removeReminder(selectedSchedule);
-                scheduleTable.getItems().remove(selectedSchedule);
+                // Remove the schedule from the observable list
+                ObservableList<WorkoutSchedule> scheduleObservableList = scheduleTable.getItems();
+                scheduleObservableList.remove(selectedSchedule);
 
+                // Remove the schedule from the workoutReminders list
+                WorkoutSchedule.removeReminder(selectedSchedule);
             }
         }
     }

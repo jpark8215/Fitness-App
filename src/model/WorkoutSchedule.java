@@ -11,7 +11,7 @@ import java.util.List;
 public class WorkoutSchedule {
 
     // Declare a static List that will store the workout reminders
-    private static List<WorkoutSchedule> workoutReminders;
+    private static List<WorkoutSchedule> workoutReminders= new ArrayList<>();
     private Workout workout;
     private LocalDateTime reminderDateTime;
 
