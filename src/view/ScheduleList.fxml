@@ -7,12 +7,13 @@
 
 <AnchorPane fx:id="scheduleField" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ScheduleListController">
 
-    <TableView fx:id="scheduleTable" layoutX="30.0" layoutY="77.0" prefHeight="240.0" prefWidth="340.0">
+    <TableView fx:id="scheduleTable" layoutX="30.0" layoutY="34.0" prefHeight="394.0" prefWidth="340.0">
         <columns>
             <TableColumn fx:id="workoutNameCol" prefWidth="200.0" text="Workout" />
             <TableColumn fx:id="timeCol" prefWidth="140.0" text="Time" />
         </columns>
     </TableView>
-    <Button fx:id="mainButton" layoutX="30.0" layoutY="478.0" mnemonicParsing="false" onAction="#mainButtonHandler" text="To Main" />
-   <Button fx:id="removeButton" layoutX="259.0" layoutY="478.0" mnemonicParsing="false" onAction="#removeButtonHandler" text="Remove Schedule" />
+    <Button fx:id="mainButton" layoutX="30.0" layoutY="537.0" mnemonicParsing="false" onAction="#mainButtonHandler" text="To Main" />
+   <Button fx:id="removeButton" layoutX="259.0" layoutY="537.0" mnemonicParsing="false" onAction="#removeButtonHandler" text="Remove Schedule" />
+   <Button fx:id="updateButton" layoutX="259.0" layoutY="473.0" mnemonicParsing="false" onAction="#updateButtonHandler" prefHeight="25.0" prefWidth="111.0" text="Update Schedule" />
 </AnchorPane>

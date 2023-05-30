@@ -24,13 +24,13 @@ public class MainController {
     private Button exitButton;
 
     @FXML
-    private Button removeWorkoutButton;
+    private Button manageWorkoutButton;
 
     @FXML
     private Button videoSearchButton;
 
-    @FXML
-    private Button workoutByIndexButton;
+//    @FXML
+//    private Button workoutByIndexButton;
 
     @FXML
     private Button workoutScheduleButton;
@@ -55,7 +55,7 @@ public class MainController {
 
     // Method to handle remove workout button click
     @FXML
-    void removeWorkout(ActionEvent event) throws IOException {
+    void manageWorkout(ActionEvent event) throws IOException {
         // Get the stage and load the WorkoutList.fxml view
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/WorkoutList.fxml")));
@@ -73,15 +73,15 @@ public class MainController {
         stage.show();
     }
 
-    // Method to handle workout by index button click
-    @FXML
-    void workoutByIndex(ActionEvent event) throws IOException {
-        // Get the stage and load the WorkoutList.fxml view
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/WorkoutList.fxml")));
-        stage.setScene(new Scene(scene));
-        stage.show();
-    }
+//    // Method to handle workout by index button click
+//    @FXML
+//    void workoutByIndex(ActionEvent event) throws IOException {
+//        // Get the stage and load the WorkoutList.fxml view
+//        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+//        scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/WorkoutList.fxml")));
+//        stage.setScene(new Scene(scene));
+//        stage.show();
+//    }
 
     // Method to handle workout schedule button click
     @FXML

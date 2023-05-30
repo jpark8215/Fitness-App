@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
 
     <Label layoutX="25.0" layoutY="43.0" text="Select an option:" />
     <Button fx:id="addWorkoutButton" layoutX="25.0" layoutY="75.0" onAction="#addWorkout" prefHeight="25.0" prefWidth="150.0" text="Add workout" />
-    <Button fx:id="removeWorkoutButton" layoutX="25.0" layoutY="115.0" onAction="#removeWorkout" prefHeight="25.0" prefWidth="150.0" text="Remove workout" />
-    <Button fx:id="workoutByIndexButton" layoutX="25.0" layoutY="155.0" onAction="#workoutByIndex" prefHeight="25.0" prefWidth="150.0" text="Get workout by index" />
-    <Button fx:id="workoutScheduleButton" layoutX="25.0" layoutY="195.0" onAction="#workoutSchedule" prefHeight="25.0" prefWidth="150.0" text="Show workout schedule" />
-    <Button fx:id="videoSearchButton" layoutX="25.0" layoutY="235.0" onAction="#videoSearch" prefHeight="25.0" prefWidth="150.0" text="Video Search" />
-    <Button fx:id="exitButton" layoutX="25.0" layoutY="460.0" onAction="#exit" text="Exit" />
+    <Button fx:id="manageWorkoutButton" layoutX="25.0" layoutY="115.0" onAction="#manageWorkout" prefHeight="25.0" prefWidth="150.0" text="Manage workout list" />
+<!--    <Button fx:id="workoutByIndexButton" layoutX="25.0" layoutY="155.0" onAction="#workoutByIndex" prefHeight="25.0" prefWidth="150.0" text="Get workout by index" />-->
+    <Button fx:id="workoutScheduleButton" layoutX="25.0" layoutY="155.0" onAction="#workoutSchedule" prefHeight="25.0" prefWidth="150.0" text="Show workout schedule" />
+    <Button fx:id="videoSearchButton" layoutX="25.0" layoutY="195.0" onAction="#videoSearch" prefHeight="25.0" prefWidth="150.0" text="Video Search" />
+    <Button fx:id="exitButton" layoutX="25.0" layoutY="512.0" onAction="#exit" text="Exit" />
 
 
 </AnchorPane>

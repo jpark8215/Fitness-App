@@ -73,6 +73,6 @@ public class Workout {
      */
     @Override
     public String toString() {
-        return workoutName + ", " + calories + " calories";
+        return workoutName + "  (" + calories + " calories)";
     }
 }

@@ -7,14 +7,14 @@
 
 <AnchorPane fx:id="workoutField" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WorkoutListController">
 
-    <TableView fx:id="workoutTable" layoutX="30.0" layoutY="82.0" prefHeight="240.0" prefWidth="330.0">
+    <TableView fx:id="workoutTable" layoutX="35.0" layoutY="34.0" prefHeight="350.0" prefWidth="330.0">
         <columns>
             <TableColumn fx:id="indexCol" prefWidth="50.0" text="Index" />
             <TableColumn fx:id="workoutNameCol" prefWidth="210.0" text="Workout" />
             <TableColumn fx:id="calorieCol" prefWidth="70.0" text="Calorie" />
         </columns>
     </TableView>
-    <Button fx:id="mainButton" layoutX="30.0" layoutY="478.0" mnemonicParsing="false" onAction="#mainButtonHandler" text="To Main" />
-    <Button fx:id="deleteButton" layoutX="260.0" layoutY="478.0" mnemonicParsing="false" onAction="#deleteButtonHandler" text="Delete Workout" />
-    <Button fx:id="addButton" layoutX="260.0" layoutY="402.0" mnemonicParsing="false" onAction="#addButtonHandler" prefHeight="25.0" prefWidth="100.0" text="Add Schedule" />
+    <Button fx:id="mainButton" layoutX="35.0" layoutY="531.0" mnemonicParsing="false" onAction="#mainButtonHandler" text="To Main" />
+    <Button fx:id="deleteButton" layoutX="265.0" layoutY="531.0" mnemonicParsing="false" onAction="#deleteButtonHandler" text="Delete Workout" />
+    <Button fx:id="addButton" layoutX="265.0" layoutY="475.0" mnemonicParsing="false" onAction="#addScheduleButtonHandler" prefHeight="25.0" prefWidth="100.0" text="Add Schedule" />
 </AnchorPane>

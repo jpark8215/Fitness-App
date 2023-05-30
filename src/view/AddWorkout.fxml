@@ -8,14 +8,15 @@
 
 <AnchorPane fx:id="workoutField" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddWorkoutController">
 
-    <Button fx:id="saveButton" layoutX="318.0" layoutY="96.0" onAction="#saveButtonHandler" text="Save" />
-    <TextField fx:id="workoutTextField" layoutX="42.0" layoutY="92.0" prefHeight="32.0" prefWidth="215.0" promptText="Workout" />
-    <TableView fx:id="workoutTable" layoutX="42.0" layoutY="172.0" prefHeight="239.0" prefWidth="317.0">
+    <Button fx:id="saveButton" layoutX="321.0" layoutY="72.0" onAction="#saveButtonHandler" text="Save" />
+    <TextField fx:id="workoutTextField" layoutX="42.0" layoutY="68.0" prefHeight="32.0" prefWidth="215.0" promptText="Workout" />
+    <TableView fx:id="workoutTable" layoutX="42.0" layoutY="137.0" prefHeight="300.0" prefWidth="320.0">
         <columns>
-            <TableColumn fx:id="indexCol" prefWidth="56.0" text="Index" />
+            <TableColumn fx:id="indexCol" prefWidth="55.0" text="Index" />
             <TableColumn fx:id="workoutNameCol" prefWidth="195.0" text="Workout" />
-            <TableColumn fx:id="calorieCol" minWidth="0.0" prefWidth="64.0" text="Calorie" />
+            <TableColumn fx:id="calorieCol" minWidth="0.0" prefWidth="75.0" text="Calorie" />
         </columns>
     </TableView>
-    <Button fx:id="mainButton" layoutX="42.0" layoutY="469.0" mnemonicParsing="false" onAction="#mainButtonHandler" text="To Main" />
+    <Button fx:id="mainButton" layoutX="42.0" layoutY="494.0" mnemonicParsing="false" onAction="#mainButtonHandler" text="To Main" />
+   <Button fx:id="addScheduleButton" layoutX="257.0" layoutY="494.0" mnemonicParsing="false" onAction="#addScheduleButtonHandler" prefHeight="25.0" prefWidth="100.0" text="Add Schedule" />
 </AnchorPane>
