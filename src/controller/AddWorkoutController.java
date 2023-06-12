@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Optional;
@@ -132,15 +133,16 @@ public class AddWorkoutController {
             for (int i = 1; i <= 12; i++) {
                 hourComboBox.getItems().add(i);
             }
-            // Select the current hour in the hourComboBox
-            hourComboBox.getSelectionModel().select(LocalTime.now().getHour() % 12);
+            // Set the current hour in the hourComboBox based on the application's time zone
+            LocalTime currentTime = LocalTime.now(ZoneId.systemDefault());
+            hourComboBox.getSelectionModel().select(currentTime.getHour() % 12);
 
             // The minuteComboBox shows values from 0-55 in increments of 5
             for (int i = 0; i <= 55; i += 5) {
                 minuteComboBox.getItems().add(i);
             }
-            // Select the current minute in the minuteComboBox
-            minuteComboBox.getSelectionModel().select(LocalTime.now().getMinute());
+            // Select the 0 minute in the minuteComboBox
+            minuteComboBox.getSelectionModel().select(0);
 
             // The amPmComboBox shows options for AM or PM
             amPmComboBox.getItems().addAll("AM", "PM");

@@ -79,6 +79,48 @@ public class WorkoutSchedule {
         alert.setContentText("Reminder set for workout \"" + selectedWorkout.getWorkoutName() + "\" at " + dateTimeFormatted);
         alert.showAndWait();
     }
+
+    public static void updateWorkoutReminder(Workout selectedWorkout, LocalDateTime dateTime) {
+        if (dateTime.isBefore(LocalDateTime.now())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Reminder Time Passed");
+            alert.setHeaderText(null);
+            alert.setContentText("The reminder time has already passed. Please select a future date and time.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Find the existing reminder for the selected workout, if it exists
+        WorkoutSchedule existingReminder = null;
+        for (WorkoutSchedule reminder : workoutReminders) {
+            if (reminder.getWorkout().equals(selectedWorkout)) {
+                existingReminder = reminder;
+                break;
+            }
+        }
+
+        if (existingReminder != null) {
+            // Update the existing reminder with the new date and time
+            existingReminder.setReminderDateTime(dateTime);
+
+            // Show a success message to the user
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("Reminder Updated");
+            String dateTimeFormatted = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            alert.setContentText("Reminder updated for workout \"" + selectedWorkout.getWorkoutName() + "\" to " + dateTimeFormatted);
+            alert.showAndWait();
+        } else {
+            // If no existing reminder found, show an error message
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No Reminder Found");
+            alert.setContentText("No reminder found for the selected workout.");
+            alert.showAndWait();
+        }
+    }
+
+
     public static boolean hasWorkoutReminder(String workoutName) {
         for (WorkoutSchedule reminder : workoutReminders) {
             if (reminder.getWorkout().getWorkoutName().equals(workoutName)) {
@@ -87,7 +129,5 @@ public class WorkoutSchedule {
         }
         return false;
     }
-
-
 
 }
