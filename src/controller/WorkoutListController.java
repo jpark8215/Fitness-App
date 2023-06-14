@@ -92,7 +92,7 @@ public class WorkoutListController {
 
 
     @FXML
-    void addScheduleButtonHandler(ActionEvent event) {
+    void addScheduleButtonHandler(ActionEvent actionEvent) {
         // Get the selected workout from the table
         Workout selectedWorkout = workoutTable.getSelectionModel().getSelectedItem();
 
@@ -156,7 +156,6 @@ public class WorkoutListController {
             gridPane.add(amPmComboBox, 4, 1);
 
             // Add a result converter to the dialog to handle when the "Add" button is clicked
-// Add a result converter to the dialog to handle when the "Add" button is clicked
             dialog.setResultConverter(dialogButton -> {
                 if (dialogButton == addButton) {
                     // Check if any of the ComboBoxes is empty
@@ -181,25 +180,23 @@ public class WorkoutListController {
                         LocalTime time = LocalTime.of(hour % 24, minute);
                         LocalDateTime dateTime = LocalDateTime.of(date, time);
                         WorkoutSchedule.addWorkoutReminder(selectedWorkout, dateTime);
+
+//                        // Show success alert after adding to the schedule
+//                        Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+//                        successAlert.setTitle("Success");
+//                        successAlert.setHeaderText("Workout Added to Schedule");
+//                        successAlert.setContentText("The selected workout has been added to your schedule.");
+//                        successAlert.showAndWait();
                     }
                 }
                 return null;
             });
 
-
             dialog.getDialogPane().setContent(gridPane);
-
-            Optional<ButtonType> result = dialog.showAndWait();
-            if (result.isPresent()) {
-                // Date and time selected, add to schedule
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setHeaderText("Workout Added to Schedule");
-                alert.setContentText("The selected workout has been added to your schedule.");
-                alert.showAndWait();
-            }
+            dialog.showAndWait();
         }
     }
+
 
     @FXML
     void initialize() {

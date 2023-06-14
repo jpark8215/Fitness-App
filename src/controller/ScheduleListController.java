@@ -26,6 +26,7 @@ import java.util.Optional;
 
 import static model.WorkoutSchedule.workoutReminders;
 
+
 public class ScheduleListController {
     Stage stage;
     Parent scene;

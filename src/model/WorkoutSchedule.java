@@ -9,9 +9,11 @@ import java.util.List;
 
 public class WorkoutSchedule {
 
+    // List to store workout reminders
     public static List<WorkoutSchedule> workoutReminders = new ArrayList<>();
-    private Workout workout;
-    private LocalDateTime reminderDateTime;
+
+    private Workout workout; // Workout associated with the reminder
+    private LocalDateTime reminderDateTime; // Date and time for the reminder
 
     public WorkoutSchedule(Workout workout, LocalDateTime reminderDateTime) {
         this.workout = workout;
@@ -34,6 +36,7 @@ public class WorkoutSchedule {
         this.workout = workout;
     }
 
+    // Method to remove a workout reminder at the specified index
     public static void removeWorkoutReminder(int index) {
         if (index >= 0 && index < workoutReminders.size()) {
             WorkoutSchedule reminder = workoutReminders.remove(index);
@@ -43,23 +46,10 @@ public class WorkoutSchedule {
         }
     }
 
-    public static void showWorkoutReminders() {
-        System.out.println("Workout Reminders:");
-        if (workoutReminders.isEmpty()) {
-            System.out.println("No workout reminders found.");
-        } else {
-            for (int i = 0; i < workoutReminders.size(); i++) {
-                WorkoutSchedule reminder = workoutReminders.get(i);
-                String reminderDateTimeFormatted = reminder.getReminderDateTime()
-                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-                System.out.println((i + 1) + ". " + reminder.getWorkout().getWorkoutName() +
-                        " (reminder set for " + reminderDateTimeFormatted + ")");
-            }
-        }
-    }
-
+    // Method to add a workout reminder with the selected workout and date/time
     public static void addWorkoutReminder(Workout selectedWorkout, LocalDateTime dateTime) {
         if (dateTime.isBefore(LocalDateTime.now())) {
+            // Show a warning alert if the reminder time has already passed
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Reminder Time Passed");
             alert.setHeaderText(null);
@@ -72,16 +62,19 @@ public class WorkoutSchedule {
 
         workoutReminders.add(reminder);
 
+        // Show a success alert after adding the workout reminder
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Success");
         alert.setHeaderText("Workout Added to Schedule");
-        String dateTimeFormatted = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        String dateTimeFormatted = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         alert.setContentText("Reminder set for workout \"" + selectedWorkout.getWorkoutName() + "\" at " + dateTimeFormatted);
         alert.showAndWait();
     }
 
+    // Method to update a workout reminder with the selected workout and date/time
     public static void updateWorkoutReminder(Workout selectedWorkout, LocalDateTime dateTime) {
         if (dateTime.isBefore(LocalDateTime.now())) {
+            // Show a warning alert if the reminder time has already passed
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Reminder Time Passed");
             alert.setHeaderText(null);
@@ -103,15 +96,15 @@ public class WorkoutSchedule {
             // Update the existing reminder with the new date and time
             existingReminder.setReminderDateTime(dateTime);
 
-            // Show a success message to the user
+            // Show a success alert after updating the workout reminder
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText("Reminder Updated");
-            String dateTimeFormatted = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            String dateTimeFormatted = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
             alert.setContentText("Reminder updated for workout \"" + selectedWorkout.getWorkoutName() + "\" to " + dateTimeFormatted);
             alert.showAndWait();
         } else {
-            // If no existing reminder found, show an error message
+            // If no existing reminder found, show an error alert
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("No Reminder Found");
@@ -120,7 +113,7 @@ public class WorkoutSchedule {
         }
     }
 
-
+    // Method to check if a workout reminder exists for the given workout name
     public static boolean hasWorkoutReminder(String workoutName) {
         for (WorkoutSchedule reminder : workoutReminders) {
             if (reminder.getWorkout().getWorkoutName().equals(workoutName)) {
@@ -129,5 +122,4 @@ public class WorkoutSchedule {
         }
         return false;
     }
-
 }
