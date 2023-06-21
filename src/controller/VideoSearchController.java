@@ -1,14 +1,17 @@
 package controller;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -70,22 +73,52 @@ public class VideoSearchController {
                 "https://www.youtube.com/shorts/L2BgrNn44qE",
                 "https://www.youtube.com/watch?v=AfUvp0AGdYE"
         );
-        videoListView.getItems().addAll(defaultVideoUrls);
+
+        videoListView.setItems(FXCollections.observableArrayList(defaultVideoUrls));
+        videoListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+            @Override
+            public ListCell<String> call(ListView<String> listView) {
+                return new ListCell<String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setText(null);
+                        } else {
+                            String label = getCustomLabelFromUrl(item); // Customize the label based on the URL
+                            setText(label);
+                        }
+                    }
+                };
+            }
+        });
+    }
+
+    private String getCustomLabelFromUrl(String url) {
+        // Customize the label based on the URL
+        if (url.equals("https://www.youtube.com/channel/UCJyIC2zqJ-i9R84Ba29tjWA")) {
+            return "Channel";
+        } else if (url.equals("https://www.youtube.com/shorts/L2BgrNn44qE")) {
+            return "Short Video";
+        } else if (url.equals("https://www.youtube.com/watch?v=AfUvp0AGdYE")) {
+            return "Box Jumps";
+        } else {
+            return "Unknown";
+        }
     }
 
     public void videoMouseClickHandler(javafx.scene.input.MouseEvent mouseEvent) {
         // Add event handler for clicking on a list view item
-        videoListView.setOnMouseClicked(event -> {
-            if (mouseEvent.getClickCount() == 2) { // double-clicked
-                String selectedUrl = videoListView.getSelectionModel().getSelectedItem();
-                try {
-                    Desktop.getDesktop().browse(new URI(selectedUrl));
-                } catch (IOException | URISyntaxException e) {
-                    e.printStackTrace();
-                }
+        if (mouseEvent.getClickCount() == 2) { // double-clicked
+            String selectedUrl = videoListView.getSelectionModel().getSelectedItem();
+            try {
+                Desktop.getDesktop().browse(new URI(selectedUrl));
+            } catch (IOException | URISyntaxException e) {
+                e.printStackTrace();
             }
-        });
+        };
     }
+
 }
 
 

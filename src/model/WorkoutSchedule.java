@@ -40,9 +40,16 @@ public class WorkoutSchedule {
     public static void removeWorkoutReminder(int index) {
         if (index >= 0 && index < workoutReminders.size()) {
             WorkoutSchedule reminder = workoutReminders.remove(index);
-            System.out.println("Reminder removed for workout \"" + reminder.getWorkout().getWorkoutName() + "\"");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Reminder Removed");
+            alert.setHeaderText(null);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            alert.setContentText(reminder.getWorkout().getWorkoutName() + " @ "
+                    + reminder.getReminderDateTime().format(formatter) +
+                    " removed! " );
+            alert.showAndWait();
         } else {
-            System.out.println("Invalid index specified.");
+            throw new IndexOutOfBoundsException("Invalid index specified.");
         }
     }
 

@@ -1,6 +1,9 @@
 package model;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 //Represents a workout object, which contains information about the name of the workout and the number of calories burned.
 public class Workout {
     // Instance variables
@@ -13,7 +16,19 @@ public class Workout {
     //@param workoutName the name of the workout
     public Workout(String workoutName) {
         this.workoutName = workoutName;
-        this.calories = 0; // default value for calories
+        this.calories = 1; // default value for calories
+    }
+
+    public static List<Workout> getWorkouts() {
+        // Create a list to store the workouts
+        List<Workout> workouts = new ArrayList<>();
+
+        // Add sample workouts to the list
+        workouts.add(new Workout("Run"));
+        workouts.add(new Workout("Walk"));
+        workouts.add(new Workout("Swim"));
+
+        return workouts;
     }
 
     //Getter method for the workout's index in the WorkoutHub list.

@@ -4,21 +4,18 @@ package model;
 public class ActivityTracker {
 
     // Instance variables
-    private String workout; // Activity name
-    private int duration; // Duration of activity in minutes
-    private int intensity; // Intensity of activity on a scale of 1-10
-    private int caloriesBurned; // Calories burned during activity
+    private Workout workout;
+    private int duration;
+    private int caloriesBurned;
 
-    // Constructor
-    public ActivityTracker(String n, int d, int i, int c) {
-        workout = n;
-        duration = d;
-        intensity = i;
-        caloriesBurned = c;
+    public ActivityTracker(Workout workout, int duration, int caloriesBurned) {
+        this.workout = workout;
+        this.duration = duration;
+        this.caloriesBurned = caloriesBurned;
     }
 
     // Getters
-    public String getWorkout() {
+    public Workout getWorkout() {
         return workout;
     }
 
@@ -26,29 +23,30 @@ public class ActivityTracker {
         return duration;
     }
 
-    public int getIntensity() {
-        return intensity;
-    }
-
     public int getCaloriesBurned() {
         return caloriesBurned;
     }
 
     // Setters
-    public void setWorkout(String workout) {
+    public void setWorkout(Workout workout) {
         this.workout = workout;
     }
 
     public void setDuration(int duration) {
         this.duration = duration;
-    }
-
-    public void setIntensity(int intensity) {
-        this.intensity = intensity;
+        this.caloriesBurned = calculateCaloriesBurned();
     }
 
     public void setCaloriesBurned(int caloriesBurned) {
         this.caloriesBurned = caloriesBurned;
     }
 
+    // Calculate the calories burned based on the workout's calorie value and duration
+    private int calculateCaloriesBurned() {
+        if (workout != null) {
+            int caloriePerMinute = workout.getCalories(); // Assuming a method 'getCalories()' in Workout class
+            return caloriePerMinute * duration;
+        }
+        return 0;
+    }
 }

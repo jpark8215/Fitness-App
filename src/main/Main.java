@@ -5,8 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.ActivityTracker;
+import model.Workout;
 import model.WorkoutHub;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -22,180 +25,71 @@ public class Main extends Application {
         WorkoutHub workoutHubList = new WorkoutHub();
 
         System.out.println("\nThanks!");
-//
-//        while (true) {
-//            System.out.println("\nSelect an option:");
-//            System.out.println("1. Add workout");
-//            System.out.println("2. Remove workout");
-//            System.out.println("3. Get workout by index");
-//            System.out.println("4. Show workout schedule");
-//            System.out.println("5. Video Search");
-//            System.out.println("6. Exit");
-//
-//            int option = scanner.nextInt();
-//
-//            switch (option) {
-//
-//                case 1 -> {
-//                    // Prompt user to enter the name of the workout
-//                    System.out.println("Enter workout name:");
-//                    String workoutName = scanner.next();
-//
-//                    // Create a new Workout object with the given name
-//                    Workout workout = new Workout(workoutName);
-//
-//                    // Prompt user to set a reminder for the workout
-//                    System.out.println("Do you want to set a reminder for this workout? Enter 'yes' or 'no'");
-//                    String option1 = scanner.next();
-//
-//                    try {
-//                        if (option1.equals("yes")) {
-//                            // If user wants to set a reminder, prompt user to enter the reminder date and time
-//                            System.out.println("Enter reminder date (YYYY-MM-DD):");
-//                            String reminderDateInput = scanner.next();
-//                            LocalDate reminderDate = LocalDate.parse(reminderDateInput);
-//
-//                            System.out.println("Enter reminder time (HH:MM):");
-//                            String reminderTimeInput = scanner.next();
-//                            LocalTime reminderTime = LocalTime.parse(reminderTimeInput);
-//
-//                            // Combine the reminder date and time into a LocalDateTime object
-//                            LocalDateTime reminderDateTime = LocalDateTime.of(reminderDate, reminderTime);
-//
-//                            // Add the workout and its reminder to the WorkoutSchedule object
-//                            WorkoutSchedule.addWorkoutReminder(workout, reminderDateTime);
-//                            WorkoutHub.addWorkout(workout);
-//                        } else {
-//                            // If user doesn't want to set a reminder, just add the workout to the WorkoutHub object
-//                            WorkoutHub.addWorkout(workout);
-//                        }
-//                    } catch (InputMismatchException e) {
-//                        System.out.println("Error: Invalid input format. Please enter a valid number.");
-//                    } catch (NullPointerException e) {
-//                        System.out.println("Error: " + e.getMessage());
-//                    } catch (Exception e) {
-//                        System.out.println("Error: An unexpected error occurred. Please try again.");
-//                    }
-//
-//                    // Print a message indicating the workout was added
-//                    System.out.println("Workout added: " + workoutName);
-//                }
-//
-//                case 2 -> {
-//                    // Print the list of workouts with their indices
-//                    System.out.println(WorkoutHub.getWorkoutList());
-//
-//                    // Prompt user to enter the index of the workout to remove
-//                    System.out.println("Enter workout index to remove:");
-//                    int indexToRemove = scanner.nextInt();
-//
-//                    // If the index is valid, remove the workout and print a message indicating the workout was removed
-//                    if (indexToRemove >= 0 && indexToRemove < workoutHubList.getNumberOfWorkouts()) {
-//                        Workout removedWorkout = workoutHubList.getWorkoutByIndex(indexToRemove);
-//                        WorkoutHub.removeWorkout(removedWorkout);
-//                        System.out.println("Workout removed: " + removedWorkout);
-//                    } else {
-//                        // If the index is invalid, print an error message
-//                        System.out.println("Invalid index");
-//                    }
-//                }
-//                case 3 -> {
-//                    // Print the list of workouts with
-//                    System.out.println(WorkoutHub.getWorkoutList());
-//
-//                    // Prompt the user to enter the index of the workout they want to get
-//                    System.out.println("Enter workout index to get:");
-//                    int indexToGet = scanner.nextInt();
-//
-//                    // Check if the entered index is valid
-//                    if (indexToGet >= 0 && indexToGet < workoutHubList.getNumberOfWorkouts()) {
-//                        // Get the workout at the entered index
-//                        Workout gottenWorkout = workoutHubList.getWorkoutByIndex(indexToGet);
-//
-//                        // Print the gotten workout
-//                        System.out.println("Workout at index " + indexToGet + ": " + gottenWorkout);
-//
-//                        // Prompt the user to set a reminder for the gotten workout
-//                        System.out.println("Do you want to set a reminder for this workout? Enter 'yes' or 'no'");
-//                        String option2 = scanner.next();
-//
-//                        // If the user chooses to set a reminder, prompt them to enter the reminder time
-//                        if (option2.equals("yes")) {
-//                            System.out.println("Enter reminder date (YYYY-MM-DD):");
-//                            String reminderDateInput = scanner.next();
-//                            LocalDate reminderDate = LocalDate.parse(reminderDateInput);
-//
-//                            System.out.println("Enter reminder time (HH:MM):");
-//                            String reminderTimeInput = scanner.next();
-//                            LocalTime reminderTime = LocalTime.parse(reminderTimeInput);
-//
-//                            // Combine the reminder date and time into a LocalDateTime object
-//                            LocalDateTime reminderDateTime = LocalDateTime.of(reminderDate, reminderTime);
-//
-//
-//                            // Set a reminder for the gotten workout with the entered reminder date and time
-//                            WorkoutSchedule.addWorkoutReminder(gottenWorkout, LocalDateTime.from(reminderDateTime));
-//                        }
-//
-//                    } else {
-//                        System.out.println("Invalid index");
-//                    }
-//                }
-//
-//                case 4 -> {
-//                    // Show all workout reminders
-//                    WorkoutSchedule.showWorkoutReminders();
-//
-//                    // Ask user if they want to delete a reminder
-//                    System.out.println("Do you want to delete a reminder? Enter 'yes' or 'no'");
-//                    String option3 = scanner.next();
-//
-//                    if (option3.equalsIgnoreCase("yes")) {
-//                        // Ask user which reminder to delete
-//                        System.out.println("Enter the index of the reminder you want to delete:");
-//                        int index = scanner.nextInt();
-//                        scanner.nextLine(); // consume the newline character
-//
-//                        // Delete the reminder
-//                        WorkoutSchedule.removeWorkoutReminder(index);
-//                    } else {
-//                        System.out.println("Error");
-//                    }
-//                }
-//
-//
-//                case 5 -> {
-//                    // Prompt the user to enter a keyword to search for on YouTube
-//                    System.out.print("Enter keyword to search for video: ");
-//                    String keyword = scanner.next();
-//
-//                    try {
-//                        // Encode the keyword for URL
-//                        String encodedKeyword = URLEncoder.encode(keyword, StandardCharsets.UTF_8);
-//
-//                        // Open the default browser with the search result page
-//                        String url = "https://www.youtube.com/results?search_query=" + encodedKeyword + " workout";
-//                        Desktop.getDesktop().browse(new URI(url));
-//                    } catch (IOException | URISyntaxException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//                case 6 -> {
-//                    System.out.println("Goodbye!");
-//                    System.exit(0);
-//                }
-//
-//                default -> {
-//                    try {
-//                        throw new IllegalArgumentException("Invalid option");
-//                    } catch (Exception e) {
-//                        System.out.println("Error: " + e.getMessage());
-//                    }
-//                }
-//            }
-//        }
+
+        while (true) {
+            System.out.println("\nSelect an option:");
+            System.out.println("1. Activity Track and Share");
+            System.out.println("2. Exit");
+
+            int option = scanner.nextInt();
+
+            switch (option) {
+
+                case 1 -> {
+                    // Get the list of workouts from the Workout class
+//                    List<Workout> workoutList = WorkoutHub.getWorkoutObservableList();
+                    // Has sample workout list
+                    List<Workout> workoutList = Workout.getWorkouts();
+
+
+                    // Display the available workouts
+                    System.out.println("Select a workout:");
+                    for (int i = 0; i < workoutList.size(); i++) {
+                        System.out.println((i + 1) + ". " + workoutList.get(i).getWorkoutName());
+                    }
+
+                    int workoutOption = scanner.nextInt();
+
+                    // Perform the desired action based on the selected workout option
+                    if (workoutOption >= 1 && workoutOption <= workoutList.size()) {
+                        Workout selectedWorkout = workoutList.get(workoutOption - 1);
+                        // Handle the selected workout (e.g., track and share)
+                        System.out.println("Selected workout: " + selectedWorkout.getWorkoutName());
+
+                        // Ask the user to enter the duration in minutes
+                        System.out.println("Enter the duration in minutes:");
+                        int duration = scanner.nextInt();
+
+                        // Calculate the calories burned based on the selected workout and duration
+                        int caloriesBurned = selectedWorkout.getCalories() * duration;
+
+                        // Create an instance of ActivityTracker with the selected workout and calculated calories burned
+                        ActivityTracker activity = new ActivityTracker(selectedWorkout, duration, caloriesBurned);
+                        System.out.println(" You've burned " + activity.getCaloriesBurned() + " calories!");
+
+
+                    } else {
+                        System.out.println("Invalid workout option");
+                    }
+
+                }
+
+                case 2 -> {
+                    System.out.println("Goodbye!");
+                    System.exit(0);
+                }
+
+                default -> {
+                    try {
+                        throw new IllegalArgumentException("Invalid option");
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
+                }
+            }
+        }
     }
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
