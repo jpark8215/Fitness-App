@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.ActivityTracker;
+import model.MediaShare;
 import model.Workout;
 import model.WorkoutHub;
 
@@ -15,6 +16,7 @@ import java.util.Scanner;
 
 
 public class Main extends Application {
+
     public static void main(String[] args) {
 
         launch(args);
@@ -23,8 +25,6 @@ public class Main extends Application {
 
         // Create a WorkoutHub object with the list of workouts
         WorkoutHub workoutHubList = new WorkoutHub();
-
-        System.out.println("\nThanks!");
 
         while (true) {
             System.out.println("\nSelect an option:");
@@ -37,10 +37,7 @@ public class Main extends Application {
 
                 case 1 -> {
                     // Get the list of workouts from the Workout class
-//                    List<Workout> workoutList = WorkoutHub.getWorkoutObservableList();
-                    // Has sample workout list
-                    List<Workout> workoutList = Workout.getWorkouts();
-
+                    List<Workout> workoutList = WorkoutHub.getWorkoutObservableList();
 
                     // Display the available workouts
                     System.out.println("Select a workout:");
@@ -56,6 +53,16 @@ public class Main extends Application {
                         // Handle the selected workout (e.g., track and share)
                         System.out.println("Selected workout: " + selectedWorkout.getWorkoutName());
 
+                        // Ask the user if they want to set a goal
+                        System.out.println("Do you want to set a calorie burn goal? (Y/N)");
+                        String response = scanner.next();
+
+                        if (response.equalsIgnoreCase("Y")) {
+                            // Ask the user to enter the calorie burn goal
+                            System.out.println("Enter the calorie burn goal: ");
+                            int calorieBurnGoal = scanner.nextInt();
+                        }
+
                         // Ask the user to enter the duration in minutes
                         System.out.println("Enter the duration in minutes:");
                         int duration = scanner.nextInt();
@@ -63,9 +70,12 @@ public class Main extends Application {
                         // Calculate the calories burned based on the selected workout and duration
                         int caloriesBurned = selectedWorkout.getCalories() * duration;
 
+
                         // Create an instance of ActivityTracker with the selected workout and calculated calories burned
                         ActivityTracker activity = new ActivityTracker(selectedWorkout, duration, caloriesBurned);
                         System.out.println(" You've burned " + activity.getCaloriesBurned() + " calories!");
+                        // Check if the activity's calories burned reach the goal
+                        MediaShare.shareActivityIfGoalReached(activity, activity.getCaloriesBurned());
 
 
                     } else {
@@ -75,7 +85,7 @@ public class Main extends Application {
                 }
 
                 case 2 -> {
-                    System.out.println("Goodbye!");
+                    System.out.println("See you soon again!");
                     System.exit(0);
                 }
 

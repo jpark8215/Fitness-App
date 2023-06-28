@@ -4,11 +4,11 @@ public class MediaShare {
 
     // Declare instance variables
     private String userName; // The user's name
-    private String userGoal; // The user's fitness goal
+    private int userGoal; // The user's fitness goal
     private String instagramAccount; // The user's Instagram account
 
     // Constructor
-    public MediaShare(String userName, String userGoal, String instagramAccount) {
+    public MediaShare(String userName, int userGoal, String instagramAccount) {
         this.userName = userName;
         this.userGoal = userGoal;
         this.instagramAccount = instagramAccount;
@@ -19,7 +19,7 @@ public class MediaShare {
         return userName;
     }
 
-    public String getUserGoal() {
+    public int getUserGoal() {
         return userGoal;
     }
 
@@ -32,7 +32,7 @@ public class MediaShare {
         this.userName = userName;
     }
 
-    public void setUserGoal(String userGoal) {
+    public void setUserGoal(int userGoal) {
         this.userGoal = userGoal;
     }
 
@@ -41,11 +41,11 @@ public class MediaShare {
     }
 
 
-    public void shareActivityIfGoalReached(ActivityTracker activityCal, int calorieBurnGoal) {
+    public static void shareActivityIfGoalReached(ActivityTracker activityCal, int calorieBurnGoal) {
         // Check if the calories burned during the activityCal is greater than or equal to the goal
         if (activityCal.getCaloriesBurned() >= calorieBurnGoal) {
             // Construct the caption for the Instagram post
-            String caption = "I just burned " + activityCal.getCaloriesBurned() + " calories during my " + activityCal.getWorkout() + " workout! #fitness #workout #calorieburn";
+            String caption = "I just burned " + activityCal.getCaloriesBurned() + " calories! #fitness #workout #calorieburn";
 
             // Share the activityCal on Instagram
             shareOnInstagram(caption);
@@ -53,7 +53,7 @@ public class MediaShare {
     }
 
 
-    private void shareOnInstagram(String caption) {
+    private static void shareOnInstagram(String caption) {
         System.out.println("Shared on Instagram: " + caption);
     }
 }

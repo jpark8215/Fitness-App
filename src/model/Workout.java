@@ -19,17 +19,6 @@ public class Workout {
         this.calories = 1; // default value for calories
     }
 
-    public static List<Workout> getWorkouts() {
-        // Create a list to store the workouts
-        List<Workout> workouts = new ArrayList<>();
-
-        // Add sample workouts to the list
-        workouts.add(new Workout("Run"));
-        workouts.add(new Workout("Walk"));
-        workouts.add(new Workout("Swim"));
-
-        return workouts;
-    }
 
     //Getter method for the workout's index in the WorkoutHub list.
     //@return the index of the workout

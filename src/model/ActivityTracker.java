@@ -44,7 +44,7 @@ public class ActivityTracker {
     // Calculate the calories burned based on the workout's calorie value and duration
     private int calculateCaloriesBurned() {
         if (workout != null) {
-            int caloriePerMinute = workout.getCalories(); // Assuming a method 'getCalories()' in Workout class
+            int caloriePerMinute = workout.getCalories();
             return caloriePerMinute * duration;
         }
         return 0;
